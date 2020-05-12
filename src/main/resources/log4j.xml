@@ -19,7 +19,7 @@
     <logger name="com.Service">
         <level value="info"/>
     </logger>
-    <logger name="com.DAO">
+    <logger name="com.Dao">
         <level value="info"/>
     </logger>
     <logger name="com.Validator">

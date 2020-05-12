@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+        xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/mvc"
+        xmlns:mvc="http://www.springframework.org/schema/mvc">
+    <mvc:default-servlet-handler/>
+    <annotation-driven/>
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property value="/WEB-INF/view" name="prefix"/>
+        <beans:property value=".jsp" name="suffix"/>
+    </beans:bean>
+
+    <beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+        <beans:property value="org.postgresql.Driver" name="driverClassName"/>
+        <beans:property value="jdbc:postgresql://localhost:5432/postgres" name="url"/>
+        <beans:property value="postgres" name="username"/>
+        <beans:property value="qweasd" name="password"/>
+    </beans:bean>
+
+    <beans:bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+                id="hibernate5AnnotatedSessionFactory">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="annotatedClasses">
+            <beans:list>
+                <beans:value>com.Dentist.model.Dentist</beans:value>
+                <beans:value>com.Patient.model.Patient</beans:value>
+                <beans:value>com.Tickets.model.Tickets</beans:value>
+                <beans:value>com.Schedule.model.Schedule</beans:value>
+                <beans:value>com.Reception.model.Reception</beans:value>
+            </beans:list>
+        </beans:property>
+        <beans:property name="hibernateProperties">
+            <beans:props>
+                <beans:prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</beans:prop>
+                <beans:prop key="connection.driver_class">org.postgresql.Driver</beans:prop>
+                <beans:prop key="connection.url">jdbc:postgresql://localhost:5432/postgres</beans:prop>
+                <beans:prop key="hibernate.show_sql">true</beans:prop>
+                <beans:prop key="generateDdl">true</beans:prop>
+                <beans:prop key="hbm2ddl.auto">update</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean class="com.Dentist.dao.DentistDao" id="dentistDAO">
+        <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </beans:bean>
+    <beans:bean class="com.Dentist.service.DentistService" id="dentistService">
+        <beans:property name="dentistDAO" ref="dentistDAO"/>
+    </beans:bean>
+
+    <beans:bean class="com.Patient.dao.PatientDao" id="patientDAO">
+        <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </beans:bean>
+    <beans:bean class="com.Patient.service.PatientService" id="patientService">
+        <beans:property name="PatientDAO" ref="patientDAO"/>
+    </beans:bean>
+
+    <beans:bean class="com.Tickets.dao.TicketsDao" id="ticketsDAO">
+        <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </beans:bean>
+    <beans:bean class="com.Tickets.service.TicketsService" id="ticketsService">
+        <beans:property name="ticketsDAO" ref="ticketsDAO"/>
+    </beans:bean>
+
+    <beans:bean class="com.Schedule.dao.ScheduleDao" id="scheduleDAO">
+        <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </beans:bean>
+    <beans:bean class="com.Schedule.service.ScheduleService" id="scheduleService">
+        <beans:property name="scheduleDAO" ref="scheduleDAO"/>
+    </beans:bean>
+
+    <beans:bean class="com.Reception.dao.ReceptionDao" id="receptionDAO">
+        <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </beans:bean>
+    <beans:bean class="com.Reception.service.ReceptionService" id="receptionService">
+        <beans:property name="receptionDAO" ref="receptionDAO"/>
+    </beans:bean>
+
+    <context:component-scan base-package="com"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <beans:bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" id="transactionManager">
+        <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </beans:bean>
+</beans:beans>
