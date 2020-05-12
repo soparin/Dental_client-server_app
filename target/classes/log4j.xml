@@ -13,16 +13,16 @@
     </appender>
 
     <!-- Application Loggers -->
-    <logger name="com.Dentist">
+    <logger name="com.Controller">
         <level value="info"/>
     </logger>
-    <logger name="com.Patient">
+    <logger name="com.Service">
         <level value="info"/>
     </logger>
-    <logger name="com.Reception">
+    <logger name="com.DAO">
         <level value="info"/>
     </logger>
-    <logger name="com.Schedule">
+    <logger name="com.Validator">
         <level value="info"/>
     </logger>
     <logger name="com.Tickets">

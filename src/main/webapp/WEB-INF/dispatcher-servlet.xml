@@ -32,11 +32,11 @@
         <beans:property name="dataSource" ref="dataSource"/>
         <beans:property name="annotatedClasses">
             <beans:list>
-                <beans:value>com.Dentist.model.Dentist</beans:value>
-                <beans:value>com.Patient.model.Patient</beans:value>
-                <beans:value>com.Tickets.model.Tickets</beans:value>
-                <beans:value>com.Schedule.model.Schedule</beans:value>
-                <beans:value>com.Reception.model.Reception</beans:value>
+                <beans:value>com.Models.Dentist</beans:value>
+                <beans:value>com.Models.Patient</beans:value>
+                <beans:value>com.Models.Tickets</beans:value>
+                <beans:value>com.Models.Schedule</beans:value>
+                <beans:value>com.Models.Reception</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -67,37 +67,37 @@
         <beans:property name="cache" value="false"/>
     </beans:bean>
 
-    <beans:bean class="com.Dentist.dao.DentistDao" id="dentistDAO">
+    <beans:bean class="com.DAO.DentistDao" id="dentistDAO">
         <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.Dentist.service.DentistService" id="dentistService">
+    <beans:bean class="com.Service.DentistService" id="dentistService">
         <beans:property name="dentistDAO" ref="dentistDAO"/>
     </beans:bean>
-    <beans:bean class="com.Patient.dao.PatientDao" id="patientDAO">
+    <beans:bean class="com.DAO.PatientDao" id="patientDAO">
         <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.Patient.service.PatientService" id="patientService">
+    <beans:bean class="com.Service.PatientService" id="patientService">
         <beans:property name="patientDAO" ref="patientDAO"/>
     </beans:bean>
 
-    <beans:bean class="com.Tickets.dao.TicketsDao" id="ticketsDAO">
+    <beans:bean class="com.DAO.TicketsDao" id="ticketsDAO">
         <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.Tickets.service.TicketsService" id="ticketsService">
+    <beans:bean class="com.Service.TicketsService" id="ticketsService">
         <beans:property name="ticketsDAO" ref="ticketsDAO"/>
     </beans:bean>
 
-    <beans:bean class="com.Schedule.dao.ScheduleDao" id="scheduleDAO">
+    <beans:bean class="com.DAO.ScheduleDao" id="scheduleDAO">
         <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.Schedule.service.ScheduleService" id="scheduleService">
+    <beans:bean class="com.Validator.ScheduleService" id="scheduleService">
         <beans:property name="scheduleDAO" ref="scheduleDAO"/>
     </beans:bean>
 
-    <beans:bean class="com.Reception.dao.ReceptionDao" id="receptionDAO">
+    <beans:bean class="com.DAO.ReceptionDao" id="receptionDAO">
         <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.Reception.service.ReceptionService" id="receptionService">
+    <beans:bean class="com.Service.ReceptionService" id="receptionService">
         <beans:property name="receptionDAO" ref="receptionDAO"/>
     </beans:bean>
 

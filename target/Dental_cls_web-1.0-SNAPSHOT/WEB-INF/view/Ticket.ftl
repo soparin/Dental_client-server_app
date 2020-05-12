@@ -49,16 +49,14 @@
         Add new tickets or update.
 
     </h1>
-    <@sf.form action="/tickets/add" method="post" modelAttribute="ticket">
+    <@sf.form action="/tickets/add" method="post" modelAttribute="tickets">
         <table>
             <tr>
-                <td>
-                    <div hidden="true">
-                        <@sf.label path="schNum">Schedule num</@sf.label>
-                        <@sf.input path="schNum"  />
-                        <@sf.errors path="schNum"/>
-                    </div>
-                </td>
+                <div hidden="true">
+                        <@sf.label path="tickId">Ticket ID</@sf.label>
+                        <@sf.input path="tickId"/>
+                        <@sf.errors path="tickId"/>
+                </div>
             </tr>
             <tr>
                 <td><@sf.label path="stTime">Start Time</@sf.label></td>
@@ -71,13 +69,18 @@
                 <td><@sf.errors path="fnTime"/></td>
             </tr>
             <tr>
-                <td><@sf.label path="engaged">Engaged</@sf.label></td>
-                <td><@sf.input path="engaged"/></td>
-                <td><<@sf.errors path="engaged"/>/td>
+                <td><@sf.label path="schNum">Work shift</@sf.label></td>
+                <td><@sf.input onclick="this.select();" path="schNum"  /></td>
+                <td><@sf.errors path="schNum"/></td>
             </tr>
+<#--            <tr>-->
+<#--                <td><@sf.label path="engaged">Engaged</@sf.label></td>-->
+<#--                <td><@sf.input path="engaged"/></td>-->
+<#--                <td><<@sf.errors path="engaged"/>/td>-->
+<#--            </tr>-->
             <tr>
                 <td width="100" height="50">
-                    <#if id?has_content>
+                    <#if timeId?has_content>
                         <input type="submit" value="Update ticket"  />
                     <#else>
                         <input type="submit" value="Add ticket"/>
@@ -93,33 +96,36 @@
         </h1>
         <table class="tg">
             <tr>
-                <th width="80">Schedule number</th>
-                <th width="120">Start time</th>
-                <th width="120">Finish time</th>
-                <th width="100">Engaged</th>
-                <th width="80">Action</th>
-                <th width="80">Edit</th>
-                <th width="80">Delete</th>
+                <th width="30">Ticket number</th>
+                <th width="30">Work shift</th>
+                <th width="80">Start time</th>
+                <th width="80">Finish time</th>
+                <th width="80">Engaged</th>
+                <th width="60">Action</th>
+                <th width="60">Edit</th>
+                <th width="60">Delete</th>
             </tr>
             <#list  listTickets as ticket>
                 <tr>
+                    <td>${ticket.tickId}</td>
                     <td>${ticket.schNum}</td>
                     <td>${ticket.stTime}</td>
                     <td>${ticket.fnTime}</td>
                     <td>${ticket.engaged?then("Engaged", "Free")}</td>
                     <#if ticket.engaged>
-                        <td><a href="/tick/ref/${ticket.stTime}">Refuse</a></td>
+                        <td><a href="/tick/act/${ticket.tickId}">Refuse</a></td>
                     <#else>
-                        <td><a href="/tick/take/${ticket.stTime}">Take</a></td>
+                        <td><a href="/tick/act/${ticket.tickId}">Take</a></td>
                     </#if>
-                    <td><a href="/tick/edit/${ticket.stTime}">Edit</a></td>
-                    <td><a href="/tick/remove/${ticket.stTime}">Delete</a></td>
+                    <td><a href="/tick/edit/${ticket.tickId}">Edit</a></td>
+                    <td><a href="/tick/remove/${ticket.tickId}">Delete</a></td>
                 </tr>
             </#list>
         </table>
         <p><h2>Just <a href="/">click here</a>, if you want back to the menu </h2></p>
     <#else>
         <h1>
+            <p>List of tickets is empty.</p>
             <p>You have some error with add/update form now!!!(<a href="/dentists">Click here to cancel</a>)</p>
             <p>If you want back to the menu just <a href="/">click here</a>)</p>
         </h1>
