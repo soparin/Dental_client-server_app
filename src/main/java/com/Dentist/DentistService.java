@@ -26,7 +26,7 @@ public class DentistService {
     }
 
     @Transactional
-    public List<Dentist> listDentistFilter(String surname) {
+    public List<Dentist> listDentistFilter(String surname){
         List<Dentist> filteredListOfDent = new ArrayList<>();
         for (Dentist dentist : this.dentistDao.listDentist()) {
             if (dentist.getSurname().contains(surname)) {

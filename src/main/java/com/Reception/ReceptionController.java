@@ -32,10 +32,10 @@ public class ReceptionController {
     }
 
     @RequestMapping(value = "/receptions/add", method = RequestMethod.POST)
-    public String addRec(@ModelAttribute @Valid Reception reception, BindingResult result){
+    public String addRec(@ModelAttribute @Valid Reception reception, BindingResult result, Model model){
         receptionValidator.validate(reception, result);
         if(result.hasErrors()){
-            logger.info("ERRORS");
+            model.addAttribute("listPatient", this.receptionService.listReception());
             return "Reception";
         }
         if(reception.getRecCount() == null){

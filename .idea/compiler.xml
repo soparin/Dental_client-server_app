@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Dental_cls_web" />
+        <module name="Dental_cls_web(Lab_3.5_version)" />
+        <module name="Dental_client-server_app" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Dental_client-server_app" options="-Xlint:all" />
+      <module name="Dental_cls_web" options="-Xlint:all" />
+      <module name="Dental_cls_web(Lab_3.5_version)" options="-Xlint:all" />
+    </option>
+  </component>
+</project>

@@ -32,9 +32,10 @@ public class DentistController {
     }
 
     @RequestMapping(value = "/dentists/add", method = RequestMethod.POST)
-    public String addDent(@ModelAttribute @Valid Dentist dentist, BindingResult result){
+    public String addDent(@ModelAttribute @Valid Dentist dentist, BindingResult result, Model model){
         dentistValidator.validate(dentist, result);
         if(result.hasErrors()){
+            model.addAttribute("listDentist", this.dentistService.listDentist());
             return "Dentist";
         }
         if(dentist.getDentistId() == null){
@@ -44,18 +45,20 @@ public class DentistController {
         }
         return "redirect:/dentists";
     }
-
-    @RequestMapping("/dent/remove/{id}")
-    public String removeDent(@PathVariable("id") Integer id){
-        this.dentistService.removeDent(id);
-        return "redirect:/dentists";
-    }
-
-    @RequestMapping("/dent/edit/{id}")
-    public String editDent(@PathVariable("id") Integer id, Model model){
-        model.addAttribute("dentist", this.dentistService.getDentById(id));
+    @RequestMapping(value = "/dent/edit", method = RequestMethod.POST)
+    public String editDent(@ModelAttribute Dentist dentist, Model model){
+        dentist = this.dentistService.getDentById(dentist.getDentistId());
+        model.addAttribute("dentist", dentist);
         model.addAttribute("listDentist", this.dentistService.listDentist());
 
         return "Dentist";
     }
+
+    @RequestMapping(value = "/dent/remove", method = RequestMethod.POST)
+    public String deleteCl(@ModelAttribute Dentist dentist)
+    {
+        this.dentistService.removeDent(dentist.getDentistId());
+        return "redirect:/dentists";
+    }
+
 }

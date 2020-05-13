@@ -61,12 +61,12 @@
             </tr>
             <tr>
                 <td><@sf.label path="surname">Surname</@sf.label></td>
-                <td><@sf.input path="surname"/></td>
+                <td><@sf.input pattern="^[A-Za-zА-Яа-яЁё\s]+$" path="surname"/></td>
                 <td><@sf.errors path="surname"/></td>
             </tr>
             <tr>
                 <td><@sf.label path="name">Name</@sf.label></td>
-                <td> <@sf.input path="name"/></td>
+                <td> <@sf.input pattern="^[A-Za-zА-Яа-яЁё\s]+$" path="name"/></td>
                 <td><@sf.errors path="name"/></td>
             </tr>
             <tr>
@@ -76,12 +76,12 @@
             </tr>
             <tr>
                 <td><@sf.label path="policy">Medical policy</@sf.label>
-                <td><@sf.input path="policy"/></td>
+                <td><@sf.input pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}-[0-9]{3}" path="policy"/></td>
                 <td><@sf.errors path="policy"/></td>
             </tr>
             <tr>
                 <td><@sf.label path="snils">SNILS</@sf.label></td>
-                <td><@sf.input path="snils"/></td>
+                <td><@sf.input pattern="[0-9]{3}-[0-9]{4}-[0-9]{2}-[0-9]{2}"path="snils"/></td>
                 <td><@sf.errors path="snils"/></td>
             </tr>
             <tr>
@@ -91,7 +91,7 @@
             </tr>
             <tr>
                 <td><@sf.label path="pPhone">Patient phone</@sf.label></td>
-                <td><@sf.input path="pPhone"/></td>
+                <td><@sf.input pattern="8[0-9]{10}" type="number" path="pPhone"/></td>
                 <td><@sf.errors path="pPhone"/></td>
             </tr>
             <tr>
@@ -142,7 +142,7 @@
     <#else>
         <h1>
             <p>List of receptions is empty.</p>
-            <p>You have some error with add/update form now!!!(<a href="/patients">Click here to cancel</a>)</p>
+            <p>Click <a href="/patients">here</a> to cancel.</p>
             <p>If you want back to the menu just <a href="/">click here</a>)</p>
         </h1>
     </#if>

@@ -28,7 +28,7 @@ public class Dentist {
     @NotBlank(message = "Specialization is required")
     @Size(max = 30, message = "Specialization name should be from 1 to 30 symbols")
     private String spec;
-    @Column(name = "carier_start_date")
+    @Column(name = "career_start_date")
     @NotBlank(message = "Date of career start is required")
     @Size(max = 10, message = "Use other format (yyyy-mm-dd)")
     private String stDate;
@@ -40,7 +40,7 @@ public class Dentist {
     public Integer getDentistId() {
         return dentistId;
     }
-    public void setDentistId(Integer dentistId) {
+    public void setDentistId(int dentistId) {
         this.dentistId = dentistId;
     }
     public String getName() {

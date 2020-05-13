@@ -70,17 +70,12 @@
             </tr>
             <tr>
                 <td><@sf.label path="schNum">Work shift</@sf.label></td>
-                <td><@sf.input onclick="this.select();" path="schNum"  /></td>
+                <td><@sf.input type="number" onclick="this.select();" path="schNum"  /></td>
                 <td><@sf.errors path="schNum"/></td>
             </tr>
-<#--            <tr>-->
-<#--                <td><@sf.label path="engaged">Engaged</@sf.label></td>-->
-<#--                <td><@sf.input path="engaged"/></td>-->
-<#--                <td><<@sf.errors path="engaged"/>/td>-->
-<#--            </tr>-->
             <tr>
                 <td width="100" height="50">
-                    <#if timeId?has_content>
+                    <#if id?has_content>
                         <input type="submit" value="Update ticket"  />
                     <#else>
                         <input type="submit" value="Add ticket"/>
@@ -126,7 +121,7 @@
     <#else>
         <h1>
             <p>List of tickets is empty.</p>
-            <p>You have some error with add/update form now!!!(<a href="/dentists">Click here to cancel</a>)</p>
+            <p>Click <a href="/dentists">here</a> to cancel.</p>
             <p>If you want back to the menu just <a href="/">click here</a>)</p>
         </h1>
     </#if>

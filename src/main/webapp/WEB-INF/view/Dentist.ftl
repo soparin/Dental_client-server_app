@@ -62,7 +62,7 @@
         </tr>
         <tr>
             <td><@sf.label path="surname">Surname</@sf.label></td>
-            <td><@sf.input path="surname"/></td>
+            <td><@sf.input  path="surname"/></td>
             <td><@sf.errors path="surname"/></td>
         </tr>
         <tr>
@@ -87,7 +87,7 @@
         </tr>
         <tr>
             <td><@sf.label path="workPhone">Work phone</@sf.label></td>
-            <td><@sf.input path="workPhone"/></td>
+            <td><@sf.input pattern="8[0-9]{10}" type="number" path="workPhone"/></td>
             <td><@sf.errors path="workPhone"/></td>
         </tr>
         <tr>
@@ -102,6 +102,7 @@
         </tr>
     </table>
 </@sf.form>
+
     <#if listDentist?has_content>
         <h1>
             <p>List of dentists</p>
@@ -127,8 +128,22 @@
                     <td>${dentist.spec}</td>
                     <td>${dentist.stDate}</td>
                     <td>${dentist.workPhone}</td>
-                    <td><a href="/dent/edit/${dentist.dentistId}">Edit</a></td>
-                    <td><a href="/dent/remove/${dentist.dentistId}">Delete</a></td>
+                    <td>
+                        <@sf.form action="/dent/edit" method="post" modelAttribute="dentist">
+                        <div hidden="true">
+                        <@sf.input type="hidden "name="data" path="dentistId" value=dentist.dentistId />
+                        </div>
+                         <input type="submit" value="Edit"/>
+                        </@sf.form>
+                    </td>
+                    <td>
+                        <@sf.form action="/dent/remove" method="post" modelAttribute="dentist">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="dentistId" value=dentist.dentistId />
+                            </div>
+                            <input type="submit" value="Delete"/>
+                        </@sf.form>
+                    </td>
                 </tr>
             </#list>
         </table>
@@ -136,7 +151,7 @@
     <#else>
         <h1>
             <p>List of dentists is empty.</p>
-            <p>You have some error with add/update form now!!!(<a href="/dentists">Click here to cancel</a>)</p>
+            <p>Click <a href="/dentists">here</a> to cancel.</p>
             <p>If you want back to the menu just <a href="/">click here</a>)</p>
         </h1>
     </#if>

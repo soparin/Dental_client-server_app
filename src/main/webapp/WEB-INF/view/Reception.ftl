@@ -62,12 +62,12 @@
             </tr>
             <tr>
                 <td><@sf.label path="dentistId">Dentist ID</@sf.label></td>
-                <td> <@sf.input onclick="this.select();" path="dentistId"/></td>
+                <td> <@sf.input type="number" onclick="this.select();" path="dentistId"/></td>
                 <td><@sf.errors path="dentistId"/></td>
             </tr>
             <tr>
                 <td><@sf.label path="patientId">Patient ID</@sf.label></td>
-                <td><@sf.input onclick="this.select();" path="patientId"/></td>
+                <td><@sf.input type="number" onclick="this.select();" path="patientId"/></td>
                 <td><@sf.errors path="patientId"/></td>
             </tr>
             <tr>
@@ -123,7 +123,7 @@
     <#else>
         <h1>
             <p>List of receptions is empty.</p>
-            <p>You have some error with add/update form now!!!(<a href="/receptions">Click here to cancel</a>).</p>
+            <p>Click <a href="/receptions">here</a> to cancel.</p>
             <p>If you want back to the menu just <a href="/">click here</a>)</p>
         </h1>
     </#if>

@@ -29,8 +29,9 @@ public class PatientController {
     }
 
     @RequestMapping(value = "/patients/add", method = RequestMethod.POST)
-    public String addPat(@ModelAttribute @Valid Patient patient, BindingResult result){
+    public String addPat(@ModelAttribute @Valid Patient patient, BindingResult result, Model model){
         if(result.hasErrors()){
+            model.addAttribute("listPatient", this.patientService.listPatient());
             return "Patient";
         }
         if(patient.getPatientId() == null){

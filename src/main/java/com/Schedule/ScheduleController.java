@@ -32,9 +32,10 @@ public class ScheduleController {
     }
 
     @RequestMapping(value = "/schedules/add", method = RequestMethod.POST)
-    public String addSched(@ModelAttribute @Valid Schedule schedule, BindingResult result){
+    public String addSched(@ModelAttribute @Valid Schedule schedule, BindingResult result, Model model){
         scheduleValidator.validate(schedule, result);
         if(result.hasErrors()){
+            model.addAttribute("listSchedule", this.scheduleService.listSchedule());
             return "Schedule";
         }
         if(schedule.getSchNum() == null){

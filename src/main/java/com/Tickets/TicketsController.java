@@ -32,9 +32,10 @@ public class TicketsController {
     }
 
     @RequestMapping(value = "/tickets/add", method = RequestMethod.POST)
-    public String addTick(@ModelAttribute @Valid Tickets tickets, BindingResult result){
+    public String addTick(@ModelAttribute @Valid Tickets tickets, BindingResult result, Model model){
         ticketsValidator.validate(tickets, result);
         if(result.hasErrors()){
+            model.addAttribute("listTickets", this.ticketsService.listTickets());
             return "Ticket";
         }
         if(tickets.getTickId() == null){
