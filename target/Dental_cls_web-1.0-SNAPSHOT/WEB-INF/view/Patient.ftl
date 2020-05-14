@@ -72,7 +72,7 @@
             <tr>
                 <td><@sf.label path="birth">Birth</@sf.label></td>
                 <td><@sf.input type="date" path="birth"/></td>
-                <td><<@sf.errors path="birth"/>/td>
+                <td><@sf.errors path="birth"/></td>
             </tr>
             <tr>
                 <td><@sf.label path="policy">Medical policy</@sf.label>
@@ -81,7 +81,7 @@
             </tr>
             <tr>
                 <td><@sf.label path="snils">SNILS</@sf.label></td>
-                <td><@sf.input pattern="[0-9]{3}-[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="000-0000-00-00"path="snils"/></td>
+                <td><@sf.input pattern="[0-9]{3}-[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="000-0000-00-00" path="snils"/></td>
                 <td><@sf.errors path="snils"/></td>
             </tr>
             <tr>
@@ -96,7 +96,7 @@
             </tr>
             <tr>
                 <td width="100" height="50">
-                    <#if id?has_content>
+                    <#if patient.patientId?has_content>
                         <input type="submit" value="Update patient"  />
                     <#else>
                         <input type="submit" value="Add patient"/>

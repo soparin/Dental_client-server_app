@@ -69,13 +69,13 @@
                 <td><@sf.errors path="fnTime"/></td>
             </tr>
             <tr>
-                <td><@sf.label path="schNum">Work shift</@sf.label></td>
-                <td><@sf.input type="number" onclick="this.select();" path="schNum"  /></td>
-                <td><@sf.errors path="schNum"/></td>
+                <td><@sf.label path="ScheduleNum">Work shift</@sf.label></td>
+                <td><@sf.input type="number" onclick="this.select();" path="ScheduleNum"  /></td>
+                <td><@sf.errors path="ScheduleNum"/></td>
             </tr>
             <tr>
                 <td width="100" height="50">
-                    <#if id?has_content>
+                    <#if tickets.tickId?has_content>
                         <input type="submit" value="Update ticket"  />
                     <#else>
                         <input type="submit" value="Add ticket"/>
@@ -101,7 +101,7 @@
             <#list  listTickets as ticket>
                 <tr>
                     <td>${ticket.tickId}</td>
-                    <td>${ticket.schNum}</td>
+                    <td>${ticket.scheduleNum}</td>
                     <td>${ticket.stTime}</td>
                     <td>${ticket.fnTime}</td>
                     <td>${ticket.engaged?then("Engaged", "Free")}</td>

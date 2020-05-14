@@ -1,6 +1,5 @@
 package com.Tickets;
 
-import com.Patient.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -62,19 +61,6 @@ public class TicketsController {
         this.ticketsService.removeTick(ticket.getTickId());
         return "redirect:/tickets";
     }
-//    @RequestMapping("/tick/remove/{id}")
-//    public String removeTick(@PathVariable("id") Integer id){
-//        this.ticketsService.removeTick(id);
-//        return "redirect:/tickets";
-//    }
-//
-//    @RequestMapping("/tick/edit/{id}")
-//    public String editTick(@PathVariable("id") Integer id, Model model){
-//        model.addAttribute("tickets", this.ticketsService.getTickById(id));
-//        model.addAttribute("listTickets", this.ticketsService.listTickets());
-//
-//        return "Ticket";
-//    }
 
     @RequestMapping(value = "/tick/act", method = RequestMethod.POST)
     public String actOnTick(@ModelAttribute Tickets ticket, Model model){
@@ -83,9 +69,4 @@ public class TicketsController {
         this.ticketsService.actOnTick(ticket.getTickId());
         return "redirect:/tickets";
     }
-//    @RequestMapping("/tick/act/{id}")
-//    public String actOnTick(@PathVariable("id") Integer id){
-//        this.ticketsService.updateTick(this.ticketsService.actOnTick(id));
-//        return "redirect:/tickets";
-//    }
 }

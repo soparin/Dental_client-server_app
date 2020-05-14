@@ -22,7 +22,7 @@ public class ScheduleValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors){
         Schedule schedule = (Schedule) target;
-        if(scheduleDao.getSchedByDent(schedule.getSchNum(),
+        if(scheduleDao.getSchedByDent(schedule.getScheduleNum(),
                         schedule.getDentistId(), schedule.getDateTickets()) != null) {
             errors.rejectValue("dentistId", "", "Dentist already have schedule on this date.");
         }

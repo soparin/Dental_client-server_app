@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,5 +19,8 @@ public class MenuService {
         this.menuDao = menuDao;
     }
 
-
+    @Transactional
+    public List<PatientMenu> patQuery(String spec, String date) {
+        return this.menuDao.infoForPatients(spec, date);
+    }
 }

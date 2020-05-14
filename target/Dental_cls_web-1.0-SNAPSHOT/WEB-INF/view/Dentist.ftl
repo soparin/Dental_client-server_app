@@ -73,7 +73,7 @@
         <tr>
             <td><@sf.label path="birth">Birth</@sf.label></td>
             <td><@sf.input type="date" path="birth"/></td>
-            <td><<@sf.errors path="birth"/>/td>
+            <td><@sf.errors path="birth"/></td>
         </tr>
         <tr>
             <td><@sf.label path="spec">Specialization</@sf.label>

@@ -1,15 +1,21 @@
 package com.Patient;
+
+import com.Reception.Reception;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Embeddable
-@Table(name = "patient")
+@Table(name = "patient", schema = "public")
 public class Patient {
     @Id
     @Column(name = "patient_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@OneToMany(mappedBy = "Reception", cascade = CascadeType.ALL, orphanRemoval = true)
     private Integer patientId;
     @Column(name = "first_name")
     @NotBlank(message = "Surname is required")
@@ -88,16 +94,19 @@ public class Patient {
     public void setPPhone(String pPhone){
         this.pPhone = pPhone;
     }
-    public Patient(Integer patientId, String name, String surname, String  birth, String policy, String snils, String lastRec, String phone) {
+
+    public Patient(Integer patientId, String surname, String name, String birth,
+                   String policy, String snils, String lastRec, String pPhone, Set<Reception> patReception) {
         this.patientId = patientId;
-        this.name = name;
         this.surname = surname;
+        this.name = name;
         this.birth = birth;
         this.policy = policy;
         this.snils = snils;
         this.lastRec = lastRec;
-        this.pPhone = phone;
+        this.pPhone = pPhone;
     }
+
     public Patient() { }
     @Override
     public String toString() {

@@ -53,17 +53,17 @@ PatientDao {
     }
 
     @Transactional
-    public Patient getPatByPhone(Integer ID, String phone) {
+    public Patient getPatByParam(Integer ID, String param, String method) {
         Session session = this.sessionFactory.getCurrentSession();
         List<Patient> inValidPatientList;
 
         if(ID != null) {
             inValidPatientList = session.createQuery("SELECT p FROM Patient p " +
-                    "WHERE p.pPhone = '" + phone + "' AND NOT p.patientId = " + ID.toString()).list();
+                    "WHERE p." + method + " = '" + param + "' AND NOT p.patientId = " + ID.toString()).list();
         }
         else{
             inValidPatientList = session.createQuery("SELECT p FROM Patient p " +
-                    "WHERE p.pPhone = '" + phone + "'").list();
+                    "WHERE p." + method + " = '" + param + "'").list();
         }
 
         if (inValidPatientList.isEmpty())

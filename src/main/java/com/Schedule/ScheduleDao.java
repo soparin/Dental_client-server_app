@@ -76,7 +76,7 @@ public class ScheduleDao {
     public List<Schedule> listSchedule() {
         Session session = this.sessionFactory.getCurrentSession();
         List<Schedule> scheduleList = session.createQuery("from Schedule ").list();
-        scheduleList.sort(Comparator.comparingInt(Schedule::getSchNum));
+        scheduleList.sort(Comparator.comparingInt(Schedule::getScheduleNum));
         for(Schedule schedule: scheduleList){
             logger.info("Schedule list: " + schedule.toString());
         }

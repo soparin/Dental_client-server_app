@@ -38,7 +38,7 @@ public class ScheduleController {
             model.addAttribute("listSchedule", this.scheduleService.listSchedule());
             return "Schedule";
         }
-        if(schedule.getSchNum() == null){
+        if(schedule.getScheduleNum() == null){
             this.scheduleService.addSched(schedule);
         }else {
             this.scheduleService.updateSched(schedule);
@@ -48,7 +48,7 @@ public class ScheduleController {
 
     @RequestMapping(value = "/sched/edit", method = RequestMethod.POST)
     public String editSched(@ModelAttribute Schedule schedule, Model model){
-        schedule = this.scheduleService.getSchedById(schedule.getSchNum());
+        schedule = this.scheduleService.getSchedById(schedule.getScheduleNum());
         model.addAttribute("schedule", schedule);
         model.addAttribute("listSchedule", this.scheduleService.listSchedule());
 
@@ -58,7 +58,7 @@ public class ScheduleController {
     @RequestMapping(value = "/sched/remove", method = RequestMethod.POST)
     public String deleteSched(@ModelAttribute Schedule schedule)
     {
-        this.scheduleService.removeSched(schedule.getSchNum());
+        this.scheduleService.removeSched(schedule.getScheduleNum());
         return "redirect:/schedule";
     }
 }

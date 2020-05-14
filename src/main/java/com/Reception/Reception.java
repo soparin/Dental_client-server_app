@@ -1,5 +1,8 @@
 package com.Reception;
 
+import com.Dentist.Dentist;
+import com.Patient.Patient;
+
 import javax.persistence.*;
 
 import javax.validation.constraints.DecimalMax;
@@ -7,24 +10,26 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
+
 @Entity
 @Embeddable
-@Table(name = "reception")
+@Table(name = "reception", schema = "public")
 public class Reception {
+
     @Id
     @Column(name = "reception_count")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer recCount;
 
-    @Column(name = "patient_id")
+    @Column(name = "id_patient")
     @DecimalMin(value="1", message="ID must be in range 1 - 2*10^9")
     @DecimalMax(value="2000000000", message = "You need to update your base")
-    private int patientId;
+    private Integer patientId;
 
-    @Column(name = "dentist_id")
+    @Column(name = "id_dentist")
     @DecimalMin(value="1", message="ID must be in range 1 - 2*10^9")
     @DecimalMax(value="2000000000", message = "You need to update your base")
-    private int dentistId;
+    private Integer dentistId;
 
     @Column(name = "reception_date")
     @NotBlank(message = "Id is required")
@@ -36,22 +41,30 @@ public class Reception {
     @NotBlank(message = "Time is required")
     private String recTime;
 
+    @ManyToOne
+    @JoinColumn(name = "id_patient", nullable = false, insertable = false, updatable = false)
+    private Patient patient;
+    @ManyToOne
+    @JoinColumn(name = "id_dentist", nullable = false, insertable = false, updatable = false)
+    private Dentist dentist;
+
+
     public Integer getRecCount() {
         return recCount;
     }
     public void setRecCount(Integer recCount) {
         this.recCount = recCount;
     }
-    public int getPatientId() {
+    public Integer getPatientId() {
         return patientId;
     }
-    public void setPatientId(int patId) {
+    public void setPatientId(Integer patId) {
         this.patientId = patId;
     }
-    public int getDentistId() {
+    public Integer getDentistId() {
         return dentistId;
     }
-    public void setDentistId(int dentId) {
+    public void setDentistId(Integer dentId) {
         this.dentistId = dentId;
     }
     public String getRecDate() {
@@ -66,13 +79,30 @@ public class Reception {
     public void setRecTime(String recTime){
         this.recTime = recTime;
     }
+    public Patient getPatient() {
+        return patient;
+    }
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    public Dentist getDentist() {
+        return dentist;
+    }
+    public void setDentist(Dentist dentist) {
+        this.dentist = dentist;
+    }
 
-    public Reception(Integer recCount, int patientId, int dentistId, String recDate, String recTime, String officeAdrs) {
+
+
+    public Reception(Integer recCount, Integer patientId, Integer dentistId, String recDate,
+                     String recTime, Patient pat, Dentist dent) {
         this.recCount = recCount;
         this.patientId = patientId;
         this.dentistId = dentistId;
         this.recDate = recDate;
         this.recTime = recTime;
+        this.dentist = dent;
+        this.patient = pat;
     }
     public Reception() { }
 

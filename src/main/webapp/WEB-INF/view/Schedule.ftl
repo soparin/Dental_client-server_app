@@ -54,9 +54,9 @@
             <tr>
                 <td>
                     <div hidden="true">
-                        <@sf.label path="schNum">Schedule number</@sf.label>
-                        <@sf.input path="schNum"  />
-                        <@sf.errors path="schNum"/>
+                        <@sf.label path="scheduleNum">Schedule number</@sf.label>
+                        <@sf.input path="scheduleNum"  />
+                        <@sf.errors path="scheduleNum"/>
                     </div>
                 </td>
             </tr>
@@ -77,7 +77,7 @@
             </tr>
             <tr>
                 <td width="100" height="50">
-                    <#if id?has_content>
+                    <#if schedule.scheduleNum?has_content>
                         <input type="submit" value="Update schedule"  />
                     <#else>
                         <input type="submit" value="Add schedule"/>
@@ -92,7 +92,7 @@
         <table class="tg">
             <tr>
                 <th width="80">Schedule num</th>
-                <th width="120">Dentist ID</th>
+                <th width="120">Dentist surname</th>
                 <th width="120">dateTickets</th>
                 <th width="100">Cab</th>
                 <th width="80">Edit</th>
@@ -100,14 +100,14 @@
             </tr>
             <#list listSchedule as schedule>
                 <tr>
-                    <td>${schedule.schNum}</td>
-                    <td>${schedule.dentistId}</td>
+                    <td>${schedule.scheduleNum}</td>
+                    <td>${schedule.dentist.surname}</td>
                     <td>${schedule.dateTickets}</td>
                     <td>${schedule.cab}</td>
                     <td>
                         <@sf.form action="/sched/edit" method="post" modelAttribute="schedule">
                             <div hidden="true">
-                                <@sf.input type="hidden "name="data" path="schNum" value=schedule.schNum />
+                                <@sf.input type="hidden "name="data" path="scheduleNum" value=schedule.scheduleNum />
                             </div>
                             <input type="submit" value="Edit"/>
                         </@sf.form>
@@ -115,7 +115,7 @@
                     <td>
                         <@sf.form action="/sched/remove" method="post" modelAttribute="schedule">
                             <div hidden="true">
-                                <@sf.input type="hidden "name="data" path="schNum" value=schedule.schNum />
+                                <@sf.input type="hidden "name="data" path="scheduleNum" value=schedule.scheduleNum />
                             </div>
                             <input type="submit" value="Delete"/>
                         </@sf.form>

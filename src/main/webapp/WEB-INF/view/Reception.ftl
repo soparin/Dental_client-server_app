@@ -82,7 +82,7 @@
             </tr>
             <tr>
                 <td width="100" height="50">
-                    <#if id?has_content>
+                    <#if reception.recCount?has_content>
                         <input type="submit" value="Update reception"  />
                     <#else>
                         <input type="submit" value="Add reception"/>
@@ -97,8 +97,8 @@
         <table class="tg">
             <tr>
                 <th width="60">Reception count</th>
-                <th width="60">Dentist id</th>
-                <th width="60">Patient id</th>
+                <th width="60">Dentist surname</th>
+                <th width="60">Patient surname</th>
                 <th width="100">Reception date</th>
                 <th width="120">Reception time</th>
                 <th width="80">Edit</th>
@@ -107,8 +107,8 @@
             <#list listReception as reception>
                 <tr>
                     <td>${reception.recCount}</td>
-                    <td><a>${reception.dentistId}</a></td>
-                    <td><a>${reception.patientId}</a></td>
+                    <td><a>${reception.dentist.surname}</a></td>
+                    <td><a>${reception.patient.surname}</a></td>
                     <td>${reception.recDate}</td>
                     <td>${reception.recTime}</td>
                     <td>

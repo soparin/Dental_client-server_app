@@ -21,8 +21,14 @@ public class PatientValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors){
         Patient patient = (Patient) target;
-        if(patientDao.getPatByPhone(patient.getPatientId(), patient.getPPhone()) != null){
+        if(patientDao.getPatByParam(patient.getPatientId(), patient.getPPhone(), "pPhone") != null){
             errors.rejectValue("pPhone", "", "This phone is already in use");
+        }
+        if(patientDao.getPatByParam(patient.getPatientId(), patient.getPolicy(), "policy") != null){
+            errors.rejectValue("policy", "", "This medical policy is already in use");
+        }
+        if(patientDao.getPatByParam(patient.getPatientId(), patient.getSnils(), "snils") != null){
+            errors.rejectValue("snils", "", "This snils policy is already in use");
         }
     }
 }

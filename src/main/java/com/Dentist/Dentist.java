@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Embeddable
-@Table(name = "dentist")
+@Table(name = "dentist", schema = "public")
 public class Dentist {
     @Id
     @Column(name = "dentist_id")
@@ -43,6 +43,10 @@ public class Dentist {
     @Size(max = 15, message = "Too long number")
     private String workPhone;
 
+
+    public void setDentistId(Integer dentistId) {
+        this.dentistId = dentistId;
+    }
     public Integer getDentistId() {
         return dentistId;
     }
@@ -77,7 +81,9 @@ public class Dentist {
     public void setWorkPhone(String phone){
         this.workPhone = phone;
     }
-    public Dentist(Integer dentistId, String surname, String name, String birth, String spec, String dateOfStart, String workPhone) {
+
+    public Dentist(Integer dentistId, String surname, String name, String birth,
+                   String spec, String dateOfStart, String workPhone) {
         this.dentistId = dentistId;
         this.surname = surname;
         this.name = name;
