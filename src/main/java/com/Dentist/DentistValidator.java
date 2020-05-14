@@ -24,12 +24,5 @@ public class DentistValidator implements Validator {
         if(dentistDao.getDentByPhone(dentist.getDentistId(), dentist.getWorkPhone()) != null){
             errors.rejectValue("workPhone", "", "This phone is already in use");
         }
-        if(dentist.getBirth() == null){
-            errors.rejectValue("birth", "", "Birth is required");
-        }
-        if(dentist.getStDate() == null){
-            errors.rejectValue("stDate", "", "Do you have any dentist experience?");
-        }
-
     }
 }

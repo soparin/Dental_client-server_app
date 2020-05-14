@@ -6,18 +6,16 @@
     </head>
     <body>
     <h1>Menu</h1>
-<#--    <h2>-->
-<#--        -->
-<#--        Run as</h2>-->
+    <p><h2>Run as</h2></p>
 <#--    <@sf.form action="/index/run" method="post" modelAttribute="menu">-->
 <#--        <table>-->
 <#--            <tr>-->
-<#--                <td><@sf.label path="mask"><a href="/run/patient/{musk}/">Patient</a> with id</@sf.label></td>-->
+<#--                <td><@sf.label path="mask"><a href="/run/patient">Patient</a> with id</@sf.label></td>-->
 <#--                <td><@sf.input path="musk"/></td>-->
 <#--                <td><@sf.errors path="musk"/></td>-->
 <#--            </tr>-->
 <#--            <tr>-->
-<#--                <td><@sf.label path="mask"><a href="/run/dentist/{musk}/">Dentist</a> with id</@sf.label></td>-->
+<#--                <td><@sf.label path="mask"><a href="/run/dentist">Dentist</a> with id</@sf.label></td>-->
 <#--                <td><@sf.input path="musk"/></td>-->
 <#--                <td><@sf.errors path="musk"/></td>-->
 <#--            </tr>-->

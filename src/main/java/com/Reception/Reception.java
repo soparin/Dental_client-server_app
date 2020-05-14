@@ -15,18 +15,22 @@ public class Reception {
     @Column(name = "reception_count")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer recCount;
+
     @Column(name = "patient_id")
     @DecimalMin(value="1", message="ID must be in range 1 - 2*10^9")
     @DecimalMax(value="2000000000", message = "You need to update your base")
     private int patientId;
+
     @Column(name = "dentist_id")
     @DecimalMin(value="1", message="ID must be in range 1 - 2*10^9")
     @DecimalMax(value="2000000000", message = "You need to update your base")
     private int dentistId;
+
     @Column(name = "reception_date")
     @NotBlank(message = "Id is required")
     @Size(max = 10, message = "Use other format (yyyy-mm-yy)")
     private String recDate;
+
     @Column(name = "reception_time")
     @Size(max = 5, message = "Use other format (hh-mm-ss)")
     @NotBlank(message = "Time is required")

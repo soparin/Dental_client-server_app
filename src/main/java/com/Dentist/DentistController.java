@@ -55,7 +55,7 @@ public class DentistController {
     }
 
     @RequestMapping(value = "/dent/remove", method = RequestMethod.POST)
-    public String deleteCl(@ModelAttribute Dentist dentist)
+    public String deleteDent(@ModelAttribute Dentist dentist)
     {
         this.dentistService.removeDent(dentist.getDentistId());
         return "redirect:/dentists";

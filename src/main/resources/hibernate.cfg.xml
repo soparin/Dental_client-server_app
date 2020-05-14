@@ -20,5 +20,6 @@
         <mapping class="com.Reception.Reception"/>
         <mapping class="com.Schedule.Schedule"/>
         <mapping class="com.Tickets.Tickets"/>
+        <mapping class="com.Menu.Menu"/>
     </session-factory>
 </hibernate-configuration>

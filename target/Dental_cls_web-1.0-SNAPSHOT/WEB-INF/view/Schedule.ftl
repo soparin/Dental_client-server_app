@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <td><@sf.label path="dentistId">Dentist ID</@sf.label></td>
-                <td><@sf.input onclick="this.select();" path="dentistId"/></td>
+                <td><@sf.input type="number" onclick="this.select();" path="dentistId"/></td>
                 <td><@sf.errors path="dentistId"/></td>
             </tr>
             <tr>
@@ -72,7 +72,7 @@
             </tr>
             <tr>
                 <td><@sf.label path="cab">Cabinet</@sf.label></td>
-                <td><@sf.input onclick="this.select();" path="cab"/></td>
+                <td><@sf.input type="number" onclick="this.select();" path="cab"/></td>
                 <td><<@sf.errors path="cab"/>/td>
             </tr>
             <tr>
@@ -88,9 +88,7 @@
         </table>
     </@sf.form>
     <#if listSchedule?has_content>
-        <h1>
-            List of schedules
-        </h1>
+        <p><h1>List of schedules</h1>   <h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
         <table class="tg">
             <tr>
                 <th width="80">Schedule num</th>
@@ -106,16 +104,30 @@
                     <td>${schedule.dentistId}</td>
                     <td>${schedule.dateTickets}</td>
                     <td>${schedule.cab}</td>
-                    <td><a href="/sched/edit/${schedule.schNum}">Edit</a></td>
-                    <td><a href="/sched/remove/${schedule.schNum}">Delete</a></td>
+                    <td>
+                        <@sf.form action="/sched/edit" method="post" modelAttribute="schedule">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="schNum" value=schedule.schNum />
+                            </div>
+                            <input type="submit" value="Edit"/>
+                        </@sf.form>
+                    </td>
+                    <td>
+                        <@sf.form action="/sched/remove" method="post" modelAttribute="schedule">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="schNum" value=schedule.schNum />
+                            </div>
+                            <input type="submit" value="Delete"/>
+                        </@sf.form>
+                    </td>
                 </tr>
             </#list>
         </table>
-        <p><h2>Just <a href="/">click here</a>, if you want back to the menu </h2></p>
+        <p><h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
     <#else>
         <h1>
             <p>List of schedule is empty.</p>
-            <p>You have some error with add/update form now!!!(<a href="/schedules">Click here to cancel</a>)</p>
+            <p>Click <a href="/schedules">here</a> to cancel.</p>
             <p>If you want back to the menu just <a href="/">click here</a>)</p>
         </h1>
     </#if>

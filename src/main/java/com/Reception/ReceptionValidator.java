@@ -21,7 +21,6 @@ public class ReceptionValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors){
         Reception reception = (Reception) target;
-
     }
 }
 

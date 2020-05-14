@@ -35,7 +35,7 @@ public class ReceptionController {
     public String addRec(@ModelAttribute @Valid Reception reception, BindingResult result, Model model){
         receptionValidator.validate(reception, result);
         if(result.hasErrors()){
-            model.addAttribute("listPatient", this.receptionService.listReception());
+            model.addAttribute("listReception", this.receptionService.listReception());
             return "Reception";
         }
         if(reception.getRecCount() == null){
@@ -46,17 +46,19 @@ public class ReceptionController {
         return "redirect:/receptions";
     }
 
-    @RequestMapping("/rec/remove/{id}")
-    public String removeRec(@PathVariable("id") Integer id){
-        this.receptionService.removeRec(id);
-        return "redirect:/receptions";
-    }
-
-    @RequestMapping("/rec/edit/{id}")
-    public String editRec(@PathVariable("id") Integer id, Model model){
-        model.addAttribute("reception", this.receptionService.getRecById(id));
+    @RequestMapping(value = "/rec/edit", method = RequestMethod.POST)
+    public String editRec(@ModelAttribute Reception reception, Model model){
+        reception = this.receptionService.getRecById(reception.getRecCount());
+        model.addAttribute("reception", reception);
         model.addAttribute("listReception", this.receptionService.listReception());
 
         return "Reception";
+    }
+
+    @RequestMapping(value = "/rec/remove", method = RequestMethod.POST)
+    public String deleteRec(@ModelAttribute Reception reception)
+    {
+        this.receptionService.removeRec(reception.getRecCount());
+        return "redirect:/receptions";
     }
 }

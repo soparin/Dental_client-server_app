@@ -13,31 +13,35 @@ public class Patient {
     private Integer patientId;
     @Column(name = "first_name")
     @NotBlank(message = "Surname is required")
-    @Size(max = 20, message = "Surname should be from 1 to 50 symbols")
+    @Size(max = 50, message = "Surname should be from 1 to 50 symbols")
     private String surname;
     @Column(name = "last_name")
     @NotBlank(message = "Name is required")
-    @Size(max = 20, message = "Name should be from 1 to 50 symbols")
+    @Size(max = 50, message = "Name should be from 1 to 50 symbols")
     private String name;
     @Column(name = "birthday")
     @NotBlank(message = "Birth is required")
     @Size(max = 10, message = "Use other format (yyyy-mm-dd)")
     private String birth;
+
     @Column(name = "medical_policy")
     @NotBlank(message = "Policy is required")
     @Size(max = 20, message = "Name should be from 1 to 20 symbols")
     private String policy;
+
     @Column(name = "snils")
     @NotBlank(message = "SNILS is required")
     @Size(max = 20, message = "Name should be from 1 to 20 symbols")
     private String snils;
+
     @Column(name = "last_recept")
     @NotBlank(message = "Birth is required")
     @Size(max = 10, message = "Use other format (yyyy-mm-dd)")
     private String lastRec;
+
     @Column(name = "phone")
     @NotBlank(message = "Contact number is required")
-    @Size(max = 15, message = "Too long number")
+    @Size(max = 11, message = "Too long number")
     private String pPhone;
 
     public Integer getPatientId() {

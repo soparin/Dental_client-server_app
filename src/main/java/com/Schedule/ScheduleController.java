@@ -46,17 +46,19 @@ public class ScheduleController {
         return "redirect:/schedules";
     }
 
-    @RequestMapping("/sched/remove/{id}")
-    public String removeSched(@PathVariable("id") Integer id){
-        this.scheduleService.removeSched(id);
-        return "redirect:/schedules";
-    }
-
-    @RequestMapping("/sched/edit/{id}")
-    public String editSched(@PathVariable("id") Integer id, Model model){
-        model.addAttribute("schedule", this.scheduleService.getSchedById(id));
+    @RequestMapping(value = "/sched/edit", method = RequestMethod.POST)
+    public String editSched(@ModelAttribute Schedule schedule, Model model){
+        schedule = this.scheduleService.getSchedById(schedule.getSchNum());
+        model.addAttribute("schedule", schedule);
         model.addAttribute("listSchedule", this.scheduleService.listSchedule());
 
         return "Schedule";
+    }
+
+    @RequestMapping(value = "/sched/remove", method = RequestMethod.POST)
+    public String deleteSched(@ModelAttribute Schedule schedule)
+    {
+        this.scheduleService.removeSched(schedule.getSchNum());
+        return "redirect:/schedule";
     }
 }

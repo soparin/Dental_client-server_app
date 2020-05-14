@@ -54,17 +54,18 @@ public class ReceptionDao {
     }
 
     @Transactional
-    public Reception getRecByPhone(Integer ID, String Time) {
+    public Reception getRecByTime(Integer ID, String date, String Time) {
         Session session = this.sessionFactory.getCurrentSession();
         List<Reception> inValidReceptList;
 
         if(ID != null) {
             inValidReceptList = session.createQuery("SELECT r FROM Reception r " +
-                    "WHERE r.recTime = '" + Time + "' AND NOT r.dentistId = " + ID.toString()).list();
+                    "WHERE r.recTime = " + Time + " AND r.recDate = " +
+                    date + " AND NOT r.recCount = " + ID.toString()).list();
         }
         else{
             inValidReceptList = session.createQuery("SELECT r FROM Reception r" +
-                    "WHERE r.recTime = '" + Time + "'").list();
+                    "WHERE r.recTime = " + Time + "r.recDate = " + date).list();
         }
 
         if (inValidReceptList.isEmpty())
@@ -75,7 +76,6 @@ public class ReceptionDao {
 
     @SuppressWarnings("unchecked")
     public List<Reception> listReception() {
-        logger.info("Reception list: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         Session session = this.sessionFactory.getCurrentSession();
         List<Reception> receptionList = session.createQuery("from Reception ").list();
         receptionList.sort(Comparator.comparingInt(Reception::getRecCount));

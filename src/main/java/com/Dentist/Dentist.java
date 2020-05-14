@@ -12,26 +12,32 @@ public class Dentist {
     @Column(name = "dentist_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer dentistId;
+
     @Column(name = "first_name")
     @NotBlank(message = "Surname is required")
     @Size(max = 50, message = "Surname should be from 1 to 50 symbols")
     private String surname;
+
     @Column(name = "last_name")
     @NotBlank(message = "Name is required")
     @Size(max = 50, message = "Name should be from 1 to 50 symbols")
     private String name;
+
     @Column(name = "birthday")
     @NotBlank(message = "Birth is required")
     @Size(max = 10, message = "Use other format (yyyy-mm-dd)")
     private String birth;
+
     @Column(name = "specialization")
     @NotBlank(message = "Specialization is required")
     @Size(max = 30, message = "Specialization name should be from 1 to 30 symbols")
     private String spec;
+
     @Column(name = "career_start_date")
     @NotBlank(message = "Date of career start is required")
     @Size(max = 10, message = "Use other format (yyyy-mm-dd)")
     private String stDate;
+
     @Column(name = "work_phone")
     @NotBlank(message = "Get your work phone at the clinic administration")
     @Size(max = 15, message = "Too long number")

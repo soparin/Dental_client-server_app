@@ -86,9 +86,7 @@
         </table>
     </@sf.form>
     <#if listTickets?has_content>
-        <h1>
-            <p>Ticket list</p>
-        </h1>
+        <p><h1>Ticket list</h1>   <h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
         <table class="tg">
             <tr>
                 <th width="30">Ticket number</th>
@@ -107,17 +105,38 @@
                     <td>${ticket.stTime}</td>
                     <td>${ticket.fnTime}</td>
                     <td>${ticket.engaged?then("Engaged", "Free")}</td>
-                    <#if ticket.engaged>
-                        <td><a href="/tick/act/${ticket.tickId}">Refuse</a></td>
-                    <#else>
-                        <td><a href="/tick/act/${ticket.tickId}">Take</a></td>
-                    </#if>
-                    <td><a href="/tick/edit/${ticket.tickId}">Edit</a></td>
-                    <td><a href="/tick/remove/${ticket.tickId}">Delete</a></td>
+                    <td>
+                        <@sf.form action="/tick/act" method="post" modelAttribute="tickets">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="tickId" value=ticket.tickId />
+                            </div>
+                            <#if ticket.engaged>
+                                <input type="submit" value="Refuse"/>
+                            <#else>
+                                <input type="submit" value="Take"/>
+                            </#if>
+                        </@sf.form>
+                    </td>
+                    <td>
+                        <@sf.form action="/tick/edit" method="post" modelAttribute="tickets">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="tickId" value=ticket.tickId />
+                            </div>
+                            <input type="submit" value="Edit"/>
+                        </@sf.form>
+                    </td>
+                    <td>
+                        <@sf.form action="/tick/remove" method="post" modelAttribute="tickets">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="tickId" value=ticket.tickId />
+                            </div>
+                            <input type="submit" value="Delete"/>
+                        </@sf.form>
+                    </td>
                 </tr>
             </#list>
         </table>
-        <p><h2>Just <a href="/">click here</a>, if you want back to the menu </h2></p>
+        <p><h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
     <#else>
         <h1>
             <p>List of tickets is empty.</p>

@@ -62,7 +62,7 @@
         </tr>
         <tr>
             <td><@sf.label path="surname">Surname</@sf.label></td>
-            <td><@sf.input path="surname"/></td>
+            <td><@sf.input  path="surname"/></td>
             <td><@sf.errors path="surname"/></td>
         </tr>
         <tr>
@@ -87,12 +87,12 @@
         </tr>
         <tr>
             <td><@sf.label path="workPhone">Work phone</@sf.label></td>
-            <td><@sf.input path="workPhone"/></td>
+            <td><@sf.input type="number" path="workPhone"/></td>
             <td><@sf.errors path="workPhone"/></td>
         </tr>
         <tr>
             <td width="100" height="50">
-                <#if id?has_content>
+                <#if dentist.dentistId?has_content>
                     <input type="submit" value="Update dentist"  />
                 <#else>
                     <input type="submit" value="Add dentist"/>
@@ -102,10 +102,9 @@
         </tr>
     </table>
 </@sf.form>
+
     <#if listDentist?has_content>
-        <h1>
-            <p>List of dentists</p>
-        </h1>
+        <p><h1>List of dentists</h1>   <h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
         <table class="tg">
             <tr>
                 <th width="80">ID</th>
@@ -127,16 +126,30 @@
                     <td>${dentist.spec}</td>
                     <td>${dentist.stDate}</td>
                     <td>${dentist.workPhone}</td>
-                    <td><a href="/dent/edit/${dentist.dentistId}">Edit</a></td>
-                    <td><a href="/dent/remove/${dentist.dentistId}">Delete</a></td>
+                    <td>
+                        <@sf.form action="/dent/edit" method="post" modelAttribute="dentist">
+                        <div hidden="true">
+                        <@sf.input type="hidden "name="data" path="dentistId" value=dentist.dentistId />
+                        </div>
+                         <input type="submit" value="Edit"/>
+                        </@sf.form>
+                    </td>
+                    <td>
+                        <@sf.form action="/dent/remove" method="post" modelAttribute="dentist">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="dentistId" value=dentist.dentistId />
+                            </div>
+                            <input type="submit" value="Delete"/>
+                        </@sf.form>
+                    </td>
                 </tr>
             </#list>
         </table>
-        <p><h2>Just <a href="/">click here</a>, if you want back to the menu </h2></p>
+        <p><h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
     <#else>
         <h1>
             <p>List of dentists is empty.</p>
-            <p>You have some error with add/update form now!!!(<a href="/dentists">Click here to cancel</a>)</p>
+            <p>Click <a href="/dentists">here</a> to cancel.</p>
             <p>If you want back to the menu just <a href="/">click here</a>)</p>
         </h1>
     </#if>

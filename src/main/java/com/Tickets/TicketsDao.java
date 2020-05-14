@@ -56,27 +56,6 @@ public class TicketsDao {
         return tickets;
     }
 
-//    @Transactional
-//    public Tickets getTickByStartTime(String stTime) {
-//        Session session = this.sessionFactory.getCurrentSession();
-//        List<Tickets> inValidTickList;
-//
-//        if(ID != null) {
-//            inValidTickList = session.createQuery("SELECT t FROM Tickets t " +
-//                    "WHERE t.stTime = '" + stTime + "' AND NOT t.id = " + ID.toString()).list();
-//        }
-//        else{
-//            inValidTickList = session.createQuery("SELECT t FROM Tickets t " +
-//                    "WHERE t.stTime = '" + stTime + "'").list();
-//        }
-//
-//        if (inValidTickList.isEmpty())
-//            return null;
-//        else
-//            return inValidTickList.get(0);
-//    }
-
-
     @SuppressWarnings("unchecked")
     public List<Tickets> listTickets() {
         Session session = this.sessionFactory.getCurrentSession();
@@ -88,6 +67,4 @@ public class TicketsDao {
 
         return ticketsList;
     }
-
-
 }

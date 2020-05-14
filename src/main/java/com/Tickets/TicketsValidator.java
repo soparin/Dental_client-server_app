@@ -20,6 +20,5 @@ public class TicketsValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors){
         Tickets tickets = (Tickets) target;
-
     }
 }

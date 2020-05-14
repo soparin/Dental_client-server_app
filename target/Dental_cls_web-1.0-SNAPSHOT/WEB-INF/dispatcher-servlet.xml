@@ -105,6 +105,13 @@
         <beans:property name="receptionDAO" ref="receptionDAO"/>
     </beans:bean>
 
+    <beans:bean class="com.Menu.MenuDao" id="menuDAO">
+        <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
+    </beans:bean>
+    <beans:bean class="com.Menu.MenuService" id="menuService">
+        <beans:property name="menuDAO" ref="menuDAO"/>
+    </beans:bean>
+
     <beans:bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" id="transactionManager">
         <beans:property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory"/>
     </beans:bean>

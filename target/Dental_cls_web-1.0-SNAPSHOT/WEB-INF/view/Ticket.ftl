@@ -70,17 +70,12 @@
             </tr>
             <tr>
                 <td><@sf.label path="schNum">Work shift</@sf.label></td>
-                <td><@sf.input onclick="this.select();" path="schNum"  /></td>
+                <td><@sf.input type="number" onclick="this.select();" path="schNum"  /></td>
                 <td><@sf.errors path="schNum"/></td>
             </tr>
-<#--            <tr>-->
-<#--                <td><@sf.label path="engaged">Engaged</@sf.label></td>-->
-<#--                <td><@sf.input path="engaged"/></td>-->
-<#--                <td><<@sf.errors path="engaged"/>/td>-->
-<#--            </tr>-->
             <tr>
                 <td width="100" height="50">
-                    <#if timeId?has_content>
+                    <#if id?has_content>
                         <input type="submit" value="Update ticket"  />
                     <#else>
                         <input type="submit" value="Add ticket"/>
@@ -91,9 +86,7 @@
         </table>
     </@sf.form>
     <#if listTickets?has_content>
-        <h1>
-            <p>Ticket list</p>
-        </h1>
+        <p><h1>Ticket list</h1>   <h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
         <table class="tg">
             <tr>
                 <th width="30">Ticket number</th>
@@ -112,21 +105,42 @@
                     <td>${ticket.stTime}</td>
                     <td>${ticket.fnTime}</td>
                     <td>${ticket.engaged?then("Engaged", "Free")}</td>
-                    <#if ticket.engaged>
-                        <td><a href="/tick/act/${ticket.tickId}">Refuse</a></td>
-                    <#else>
-                        <td><a href="/tick/act/${ticket.tickId}">Take</a></td>
-                    </#if>
-                    <td><a href="/tick/edit/${ticket.tickId}">Edit</a></td>
-                    <td><a href="/tick/remove/${ticket.tickId}">Delete</a></td>
+                    <td>
+                        <@sf.form action="/tick/act" method="post" modelAttribute="tickets">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="tickId" value=ticket.tickId />
+                            </div>
+                            <#if ticket.engaged>
+                                <input type="submit" value="Refuse"/>
+                            <#else>
+                                <input type="submit" value="Take"/>
+                            </#if>
+                        </@sf.form>
+                    </td>
+                    <td>
+                        <@sf.form action="/tick/edit" method="post" modelAttribute="tickets">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="tickId" value=ticket.tickId />
+                            </div>
+                            <input type="submit" value="Edit"/>
+                        </@sf.form>
+                    </td>
+                    <td>
+                        <@sf.form action="/tick/remove" method="post" modelAttribute="tickets">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="tickId" value=ticket.tickId />
+                            </div>
+                            <input type="submit" value="Delete"/>
+                        </@sf.form>
+                    </td>
                 </tr>
             </#list>
         </table>
-        <p><h2>Just <a href="/">click here</a>, if you want back to the menu </h2></p>
+        <p><h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
     <#else>
         <h1>
             <p>List of tickets is empty.</p>
-            <p>You have some error with add/update form now!!!(<a href="/dentists">Click here to cancel</a>)</p>
+            <p>Click <a href="/dentists">here</a> to cancel.</p>
             <p>If you want back to the menu just <a href="/">click here</a>)</p>
         </h1>
     </#if>

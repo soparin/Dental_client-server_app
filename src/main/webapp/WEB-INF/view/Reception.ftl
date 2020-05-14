@@ -76,7 +76,7 @@
                 <td><<@sf.errors path="recDate"/>/td>
             </tr>
             <tr>
-                <td><@sf.label path="recTime">Reception Time</@sf.label>
+                <td><@sf.label path="recTime">Reception Time</@sf.label></td>
                 <td><@sf.input type="time" path="recTime"/></td>
                 <td><@sf.errors path="recTime"/></td>
             </tr>
@@ -93,9 +93,7 @@
         </table>
     </@sf.form>
     <#if listReception?has_content>
-        <h1>
-            <p>List of reception</p>
-        </h1>
+        <p><h1>List of receptions</h1>   <h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
         <table class="tg">
             <tr>
                 <th width="60">Reception count</th>
@@ -113,12 +111,26 @@
                     <td><a>${reception.patientId}</a></td>
                     <td>${reception.recDate}</td>
                     <td>${reception.recTime}</td>
-                    <td><a href="/rec/edit/${reception.recCount}">Edit</a></td>
-                    <td><a href="/rec/remove/${reception.recCount}">Delete</a></td>
+                    <td>
+                        <@sf.form action="/rec/edit" method="post" modelAttribute="reception">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="recCount" value=reception.recCount />
+                            </div>
+                            <input type="submit" value="Edit"/>
+                        </@sf.form>
+                    </td>
+                    <td>
+                        <@sf.form action="/rec/remove" method="post" modelAttribute="reception">
+                            <div hidden="true">
+                                <@sf.input type="hidden "name="data" path="recCount" value=reception.recCount />
+                            </div>
+                            <input type="submit" value="Delete"/>
+                        </@sf.form>
+                    </td>
                 </tr>
             </#list>
         </table>
-        <p><h2>Just <a href="/">click here</a>, if you want back to the menu </h2></p>
+        <p><h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
 
     <#else>
         <h1>

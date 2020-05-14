@@ -15,18 +15,22 @@ public class Tickets {
     @Column(name = "ticket_id" )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tickId;
+
     @Column(name = "schedule_num")
     @DecimalMin(value = "1", message = "Shift must be bigger then 0")
     @DecimalMax(value = "1440", message = "Too match shifts in list")
     private int schNum;
+
     @Column(name = "start_time")
     @Size(max = 5, message = "Use other format (hh-mm)")
     @NotBlank(message = "Start time is required")
     private String stTime;
+
     @Column(name = "finish_time")
     @Size(max = 5, message = "Use other format (hh-mm)")
     @NotBlank(message = "Finish time is required")
     private String fnTime;
+
     @Column(name = "engaged")
     private boolean engaged = false;
 

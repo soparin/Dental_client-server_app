@@ -52,13 +52,14 @@ public class ScheduleDao {
     }
 
     @Transactional
-    public Schedule getSchedByDent(Integer ID, Integer dent) {
+    public Schedule getSchedByDent(Integer ID, Integer dent, String date) {
         Session session = this.sessionFactory.getCurrentSession();
         List<Schedule> inValidScheduleList;
 
         if(ID != null) {
             inValidScheduleList = session.createQuery("SELECT s FROM Schedule s " +
-                    "WHERE s.dentistId = '" + dent + "' AND NOT s.id = " + ID.toString()).list();
+                    "WHERE s.dentistId = '" + dent + "' AND s.dateTickets = " +
+                    date + "AND NOT s.schNum = " + ID.toString()).list();
         }
         else{
             inValidScheduleList = session.createQuery("SELECT s FROM Schedule s " +

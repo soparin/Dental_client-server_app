@@ -73,7 +73,7 @@
         <tr>
             <td><@sf.label path="birth">Birth</@sf.label></td>
             <td><@sf.input type="date" path="birth"/></td>
-            <td><<@sf.errors path="birth"/>/td>
+            <td><@sf.errors path="birth"/></td>
         </tr>
         <tr>
             <td><@sf.label path="spec">Specialization</@sf.label>
@@ -87,12 +87,12 @@
         </tr>
         <tr>
             <td><@sf.label path="workPhone">Work phone</@sf.label></td>
-            <td><@sf.input pattern="8[0-9]{10}" type="number" path="workPhone"/></td>
+            <td><@sf.input type="number" path="workPhone"/></td>
             <td><@sf.errors path="workPhone"/></td>
         </tr>
         <tr>
             <td width="100" height="50">
-                <#if id?has_content>
+                <#if dentist.dentistId?has_content>
                     <input type="submit" value="Update dentist"  />
                 <#else>
                     <input type="submit" value="Add dentist"/>
@@ -104,9 +104,7 @@
 </@sf.form>
 
     <#if listDentist?has_content>
-        <h1>
-            <p>List of dentists</p>
-        </h1>
+        <p><h1>List of dentists</h1>   <h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
         <table class="tg">
             <tr>
                 <th width="80">ID</th>
@@ -147,7 +145,7 @@
                 </tr>
             </#list>
         </table>
-        <p><h2>Just <a href="/">click here</a>, if you want back to the menu </h2></p>
+        <p><h3>Just <a href="/">click here</a>, if you want back to the menu </h3></p>
     <#else>
         <h1>
             <p>List of dentists is empty.</p>

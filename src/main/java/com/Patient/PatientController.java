@@ -13,6 +13,9 @@ import java.util.logging.Logger;
 @Controller
 public class PatientController {
 
+    @Autowired
+    private PatientValidator patientValidator;
+
     @Autowired()
     @Qualifier(value = "patientService")
     private PatientService patientService;
@@ -30,6 +33,7 @@ public class PatientController {
 
     @RequestMapping(value = "/patients/add", method = RequestMethod.POST)
     public String addPat(@ModelAttribute @Valid Patient patient, BindingResult result, Model model){
+        patientValidator.validate(patient, result);;
         if(result.hasErrors()){
             model.addAttribute("listPatient", this.patientService.listPatient());
             return "Patient";
@@ -42,19 +46,19 @@ public class PatientController {
         return "redirect:/patients";
     }
 
-    @RequestMapping("/pat/remove/{id}")
-    public String removePat(@PathVariable("id") Integer id){
-        this.patientService.removePat(id);
-        return "redirect:/patients";
-    }
-
-    @RequestMapping("/pat/edit/{id}")
-    public String editPat(@PathVariable("id") Integer id, Model model){
-        model.addAttribute("patient", this.patientService.getPatById(id));
+    @RequestMapping(value = "/pat/edit", method = RequestMethod.POST)
+    public String editPat(@ModelAttribute Patient patient, Model model){
+        patient = this.patientService.getPatById(patient.getPatientId());
+        model.addAttribute("patient", patient);
         model.addAttribute("listPatient", this.patientService.listPatient());
+
         return "Patient";
     }
 
-    @RequestMapping("/")
-    public String menu(){return "index";}
+    @RequestMapping(value = "/pat/remove", method = RequestMethod.POST)
+    public String deletePat(@ModelAttribute Patient patient)
+    {
+        this.patientService.removePat(patient.getPatientId());
+        return "redirect:/patients";
+    }
 }

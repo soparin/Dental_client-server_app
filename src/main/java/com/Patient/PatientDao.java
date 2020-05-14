@@ -1,9 +1,11 @@
 package com.Patient;
 
+import com.Dentist.Dentist;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
@@ -48,6 +50,26 @@ PatientDao {
         logger.info("Patient successfully loaded. Patient details: " + patient.toString());
 
         return patient;
+    }
+
+    @Transactional
+    public Patient getPatByPhone(Integer ID, String phone) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Patient> inValidPatientList;
+
+        if(ID != null) {
+            inValidPatientList = session.createQuery("SELECT p FROM Patient p " +
+                    "WHERE p.pPhone = '" + phone + "' AND NOT p.patientId = " + ID.toString()).list();
+        }
+        else{
+            inValidPatientList = session.createQuery("SELECT p FROM Patient p " +
+                    "WHERE p.pPhone = '" + phone + "'").list();
+        }
+
+        if (inValidPatientList.isEmpty())
+            return null;
+        else
+            return inValidPatientList.get(0);
     }
 
     @SuppressWarnings("unchecked")

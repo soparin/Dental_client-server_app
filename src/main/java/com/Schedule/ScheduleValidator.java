@@ -13,6 +13,7 @@ public class ScheduleValidator implements Validator {
     @Autowired
     private ScheduleDao scheduleDao;
     Logger logger = Logger.getLogger(ScheduleValidator.class.getName());
+
     @Override
     public boolean supports(Class<?> clazz){
         return Schedule.class.equals(clazz);
@@ -21,5 +22,9 @@ public class ScheduleValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors){
         Schedule schedule = (Schedule) target;
+        if(scheduleDao.getSchedByDent(schedule.getSchNum(),
+                        schedule.getDentistId(), schedule.getDateTickets()) != null) {
+            errors.rejectValue("dentistId", "", "Dentist already have schedule on this date.");
+        }
     }
 }
