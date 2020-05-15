@@ -18,7 +18,7 @@
             }
         </style>
     </head>
-    <body>
+    <body bgcolor="#39CCCC">
         <p>
         <p>
             <h1>Sorry, we couldn't find that page :(</h1>

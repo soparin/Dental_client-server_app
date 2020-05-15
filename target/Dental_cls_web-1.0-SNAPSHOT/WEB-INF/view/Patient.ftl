@@ -42,7 +42,7 @@
         }
     </style>
 </head>
-<body>
+<body bgcolor="#39CCCC">
     <h1>
 
         Add new patient or update.

@@ -4,15 +4,15 @@
         <title>Menu</title>
         <style type="text/css"></style>
     </head>
-    <body>
+    <body bgcolor="#39CCCC">
     <h1>Menu</h1>
     <p><h2>Run as</h2></p>
     <table border="0">
-        <@sf.form action="/run/pat" method="post" modelAttribute="PatientMenu">
+        <@sf.form action="/run/pat" method="post" modelAttribute="MenuInput">
             <tr>
                 <td rowspan="2">Patient</td>
                 <td>Specialization</td>
-                <td>Date of start career</td>
+                <td>Date of reception</td>
                 <td></td>
                 <td rowspan="2"><input type="submit"></td>
             </tr>
@@ -20,17 +20,17 @@
                 <td><@sf.input path="spec" size ="30" /></td>
                 <td><@sf.input path="date" type="date" /></td>
             </tr>
-        </@sf.form>>
-        <@sf.form action="/run/dent" method="post" modelAttribute="DentistMenu">
+        </@sf.form>
+        <@sf.form action="/run/dent" method="post" modelAttribute="MenuForDent">
         <tr>
             <td rowspan="2">Dentist</td>
-            <td>Date</td>
             <td>Id</td>
+            <td>Date</td>
             <td></td>
             <td rowspan="2"><input type="submit"></td>
         </tr>
         <tr>
-            <td><@sf.input path="id" type ="number" /></td>
+            <td><@sf.input path="num"/></td>
             <td><@sf.input path="date" type="date" /></td>
             <td></td>
         </tr>

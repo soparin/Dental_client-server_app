@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Repository
-public class
-PatientDao {
+public class PatientDao {
     @Autowired
     private SessionFactory sessionFactory;
     public void setSessionFactory(SessionFactory sf) {

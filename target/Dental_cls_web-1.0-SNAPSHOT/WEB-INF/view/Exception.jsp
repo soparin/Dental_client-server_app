@@ -8,6 +8,7 @@
         <meta charset="UTF-8">
         <title>Exception</title>
     </head>
+    <body bgcolor="#39CCCC">
     <p>
         <p><h1>Sorry, something went wrong :(</h1></p>
         <p><h2>Exception occurred while processing the request</h2></p>

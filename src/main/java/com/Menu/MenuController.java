@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -28,23 +29,21 @@ public class MenuController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String menu(Model model) {
-        model.addAttribute("PatientMenu", new MenuInput());
-        model.addAttribute("patient", new PatientMenu());
-        model.addAttribute("DentistMenu", new DentistMenu());
-//        model.addAttribute("spec", new String());
-        model.addAttribute("date", new String());
-        model.addAttribute("policy", new String());
+        model.addAttribute("MenuInput", new MenuInput());
+        model.addAttribute("MenuForDent", new MenuInput());
         return "index";
     }
 
     @RequestMapping(value = "/run/pat", method = RequestMethod.POST)
-    public String query(@ModelAttribute @Valid String spec, String date, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "redirect:/run/pat";
-        }
-        model.addAttribute("qList", this.menuService.patQuery(spec, date));
-
+    public String PatQuery(@ModelAttribute MenuInput mp, Model model) {
+        model.addAttribute("qList", this.menuService.patQuery(mp.getSpec(), mp.getDate()));
         return "patQ";
+    }
+
+    @RequestMapping(value = "/run/dent", method = RequestMethod.POST)
+    public String DentQuery(@ModelAttribute MenuInput mp, Model model) {
+        model.addAttribute("qList", this.menuService.dentQuery(mp.getNum(), mp.getDate()));
+        return "dentQ";
     }
 
 }

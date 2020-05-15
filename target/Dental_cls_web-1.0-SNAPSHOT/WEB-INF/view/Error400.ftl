@@ -18,7 +18,7 @@
             }
         </style>
     </head>
-    <body>
+    <body bgcolor="#39CCCC">
         <p>
             <h1>A bad request was sent :(</h1>
         </p>

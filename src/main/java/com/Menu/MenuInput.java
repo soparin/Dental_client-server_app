@@ -1,13 +1,13 @@
 package com.Menu;
 
 public class MenuInput {
-    private String id;
+    private Integer num;
     private String spec;
     private String date;
     private String policy;
 
-    public MenuInput(String id, String spec, String date, String policy) {
-        this.id = id;
+    public MenuInput(Integer id, String spec, String date, String policy) {
+        this.num = id;
         this.spec = spec;
         this.date = date;
         this.policy = policy;
@@ -16,12 +16,12 @@ public class MenuInput {
     public MenuInput() {
     }
 
-    public String getId() {
-        return id;
+    public Integer getNum() {
+        return num;
     }
 
-    public void setId(String id) {
-        id = id;
+    public void setNum(Integer num) {
+        this.num = num;
     }
 
     public String getSpec() {

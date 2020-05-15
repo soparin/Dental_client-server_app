@@ -4,12 +4,33 @@ package com.Menu;
 public class PatientMenu {
 
     private String spec;
-    private String surname;
-    private String name;
+    private String surnamename;
     private String startDate;
     private String dateTicket;
     private String time;
     private String phone;
+
+    public PatientMenu(String spec, String surnamename, String startDate, String dateTicket,
+                       String time, String phone) {
+        this.spec = spec;
+        this.surnamename = surnamename;
+        this.startDate = startDate;
+        this.dateTicket = dateTicket;
+        this.time = time;
+        this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "PatientMenu{" +
+                "spec='" + spec + '\'' +
+                ", surnamename='" + surnamename + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", dateTicket='" + dateTicket + '\'' +
+                ", time='" + time + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
+    }
 
     public String getSpec() {
         return spec;
@@ -19,20 +40,12 @@ public class PatientMenu {
         this.spec = spec;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getSurnamename() {
+        return surnamename;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setSurnamename(String surnamename) {
+        this.surnamename = surnamename;
     }
 
     public String getStartDate() {
@@ -67,17 +80,6 @@ public class PatientMenu {
         this.phone = phone;
     }
 
-    public PatientMenu() {}
-
-    public PatientMenu(String spec, String surname, String name, String startDate,
-                       String dateTicket, String time, String phone) {
-        this.spec = spec;
-        this.surname = surname;
-        this.name = name;
-        this.startDate = startDate;
-        this.dateTicket = dateTicket;
-        this.time = time;
-        this.phone = phone;
+    public PatientMenu() {
     }
-
 }

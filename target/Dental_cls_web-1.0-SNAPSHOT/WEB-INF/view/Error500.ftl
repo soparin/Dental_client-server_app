@@ -19,7 +19,7 @@
         </style>
     </head>
 
-    <body>
+    <body bgcolor="#39CCCC">
         <p>
             <h1>The server has been deserted for a while:(</h1>
         </p>

@@ -1,8 +1,9 @@
 package com.Menu;
 
-import org.hibernate.Session;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,9 @@ import java.util.logging.Logger;
 
 @Repository
 public class MenuDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -23,26 +27,56 @@ public class MenuDao {
 
     @Transactional
     public List<PatientMenu> infoForPatients(String spec, String date) {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<PatientMenu> q = session.createQuery(
-                "SELECT d.surname, d.name, d.stDate, s.dateTickets,tbd.stTime, d.workPhone " +
-                        "From Dentist as d " +
-                        "INNER JOIN Schedule s on d.dentistId = s.dentistId " +
-                        "INNER JOIN Tickets as tbd on s.scheduleNum = tbd.scheduleNum " +
-                        "where d.spec = " + spec + " and tbd.engaged = false " +
-                        " and s.dateTickets >= '" + date + "' order by tbd.stTime").list();
-        return q;
+
+        if (spec != null && date != null) {
+            return jdbcTemplate.query(
+                    "SELECT d.first_name, d.last_name, d.career_start_date, s.tickets_by_date,tbd.start_time, d.work_phone " +
+                            " From Dentist d, Work_schedule s, Tickets_by_date tbd" +
+                            " where d.dentist_id=s.dentist_id and s.schedule_num = tbd.schedule_num and d.specialization = ? " +
+                            " and tbd.engaged = false and s.tickets_by_date >= ? " +
+                            " order by tbd.start_time",
+                    new Object[]{spec, date},
+                    (rs, i) -> {
+                        PatientMenu pm = new PatientMenu();
+                        pm.setSpec(spec);
+                        pm.setSurnamename(rs.getString(1) + " " + rs.getString(2));
+                        pm.setStartDate(rs.getString(3));
+                        pm.setDateTicket(rs.getString(4));
+                        pm.setTime(rs.getString(5));
+                        pm.setPhone(rs.getString(6));
+                        return pm;
+
+                    });
+        }
+        else
+            return null;
     }
 
     @Transactional
     public List<DentistMenu> infoForDentist(Integer id, String date) {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<DentistMenu> q = session.createQuery(
-                "SELECT .dateTickets,tbd.stTime, d.workPhone " +
-                        "From Schedule as s " +
-                        " INNER JOIN Tickets as tbd on s.schNum = tbd.schNum " +
-                        "where s.dentistId = " + id.toString() + " and tbd.engaged = true " +
-                        " and s.dateTickets >= '" + date + "' order by tbd.stTime").list();
-        return q;
+        if (id != null && date != null) {
+            logger.info("+++++++++++" + id + date);
+            List<DentistMenu> l = jdbcTemplate.query(
+                    "SELECT d.first_name, d.last_name, s.tickets_by_date ,tbd.start_time, d.work_phone" +
+                            "    From Work_schedule s, Tickets_by_date tbd, Dentist d" +
+                            "    where d.dentist_id = s.dentist_id and s.schedule_num = tbd.schedule_num " +
+                            "    and d.dentist_id = 2 and s.tickets_by_date >= ? " +
+                            "    order by tbd.start_time and tbd.engaged = true",
+                    new Object[]{ date},
+                    (rs, i) -> {
+                        DentistMenu dm = new DentistMenu();
+                        dm.setDate(rs.getString(2));
+                        dm.setSurnamname(rs.getString(0) + " " + rs.getString(1));
+                        dm.setTime(rs.getString(3));
+                        dm.setPhone(rs.getString(4));
+                        logger.info(dm.toString());
+                        return dm;
+                    });
+            return l;
+        }
+        else{
+            return null;
+        }
+
     }
 }
